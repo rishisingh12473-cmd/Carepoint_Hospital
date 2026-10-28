@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Hospital Services | CarePoint{% endblock %}
+{% block content %}
+<section class="page-banner"><div class="container"><span class="eyebrow">Patient services</span><h1 class="display-5 fw-bold mt-2">Support for every step of care.</h1><p class="lead text-secondary mb-0">Explore the services available through our hospital.</p></div></section>
+<section class="section-space"><div class="container"><div class="row g-4">
+  <div class="col-md-6 col-lg-4"><article class="soft-card p-4 h-100"><div class="icon-box mb-3"><i class="fa-solid fa-user-doctor"></i></div><h2 class="h5 fw-bold">Outpatient consultations</h2><p class="text-secondary mb-0">Request a scheduled visit with a department that matches your needs.</p></article></div>
+  <div class="col-md-6 col-lg-4"><article class="soft-card p-4 h-100"><div class="icon-box mb-3"><i class="fa-solid fa-vial-circle-check"></i></div><h2 class="h5 fw-bold">Diagnostic services</h2><p class="text-secondary mb-0">Ask our team about laboratory tests and imaging availability.</p></article></div>
+  <div class="col-md-6 col-lg-4"><article class="soft-card p-4 h-100"><div class="icon-box mb-3"><i class="fa-solid fa-kit-medical"></i></div><h2 class="h5 fw-bold">Urgent care guidance</h2><p class="text-secondary mb-0">For a medical emergency, call local emergency services or go to the nearest emergency department.</p></article></div>
+  <div class="col-md-6 col-lg-4"><article class="soft-card p-4 h-100"><div class="icon-box mb-3"><i class="fa-solid fa-baby"></i></div><h2 class="h5 fw-bold">Family health</h2><p class="text-secondary mb-0">Find care options for children, adults, and families.</p></article></div>
+  <div class="col-md-6 col-lg-4"><article class="soft-card p-4 h-100"><div class="icon-box mb-3"><i class="fa-solid fa-file-medical"></i></div><h2 class="h5 fw-bold">Patient coordination</h2><p class="text-secondary mb-0">Our team can help direct questions to the appropriate department.</p></article></div>
+  <div class="col-md-6 col-lg-4"><article class="soft-card p-4 h-100"><div class="icon-box mb-3"><i class="fa-solid fa-wheelchair"></i></div><h2 class="h5 fw-bold">Accessible support</h2><p class="text-secondary mb-0">Contact us ahead of your visit to discuss access or communication needs.</p></article></div>
+</div><div class="text-center mt-5"><a href="{% url 'appointment' %}" class="btn btn-primary">Request an appointment</a></div></div></section>
+{% endblock %}

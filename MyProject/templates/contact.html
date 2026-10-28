@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Contact CarePoint Hospital{% endblock %}
+{% block content %}
+<section class="page-banner"><div class="container"><span class="eyebrow">We're here to help</span><h1 class="display-5 fw-bold mt-2">Contact our team</h1><p class="lead text-secondary mb-0">Send a general enquiry and our team will follow up.</p></div></section>
+<section class="section-space"><div class="container"><div class="row g-4">
+  <div class="col-lg-7"><div class="soft-card p-4 p-md-5"><h2 class="h4 fw-bold mb-1">Send us a message</h2><p class="text-secondary mb-4">Please don't include urgent or highly sensitive medical information in this form.</p>
+    <form method="post" novalidate>{% csrf_token %}
+      {% for field in form %}
+        <div class="mb-3"><label class="form-label fw-semibold" for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}{% if field.errors %}<div class="text-danger small mt-1">{{ field.errors|join:", " }}</div>{% endif %}</div>
+      {% endfor %}
+      <button class="btn btn-primary" type="submit">Send enquiry <i class="fa-solid fa-arrow-right ms-2"></i></button>
+    </form>
+  </div></div>
+  <div class="col-lg-5"><div class="soft-card p-4 p-md-5 h-100" style="background:#f4faf9"><h2 class="h4 fw-bold mb-4">Get in touch</h2>
+    <div class="d-flex gap-3 mb-4"><div class="icon-box flex-shrink-0"><i class="fa-solid fa-location-dot"></i></div><div><b>Location</b><p class="text-secondary mb-0">Lucknow, Uttar Pradesh, India</p></div></div>
+    <div class="d-flex gap-3 mb-4"><div class="icon-box flex-shrink-0"><i class="fa-solid fa-envelope"></i></div><div><b>Online enquiries</b><p class="text-secondary mb-0">Use the form to contact our team.</p></div></div>
+    <div class="d-flex gap-3"><div class="icon-box flex-shrink-0"><i class="fa-regular fa-clock"></i></div><div><b>Outpatient hours</b><p class="text-secondary mb-0">Monday–Saturday, 8:00 AM–8:00 PM</p></div></div>
+    <hr><p class="small text-secondary mb-0">For emergencies, call your local emergency number or go to the nearest emergency department. This website is not an emergency service.</p>
+  </div></div>
+</div></div></section>
+{% endblock %}

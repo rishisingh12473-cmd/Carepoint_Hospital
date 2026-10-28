@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Patient Sign In | CarePoint Hospital{% endblock %}
+{% block content %}
+<section class="page-banner"><div class="container"><span class="eyebrow">Patient account</span><h1 class="display-5 fw-bold mt-2">Welcome back</h1><p class="lead text-secondary mb-0">Sign in to your CarePoint patient account.</p></div></section>
+<section class="section-space"><div class="container"><div class="row justify-content-center"><div class="col-md-8 col-lg-5">
+  <div class="soft-card p-4 p-md-5">
+    <h2 class="h4 fw-bold mb-1">Patient sign in</h2>
+    <p class="text-secondary mb-4">Use your patient account username and password.</p>
+    <form method="post">
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{ next }}">
+      {% if form.non_field_errors %}<div class="alert alert-danger" role="alert">{{ form.non_field_errors }}</div>{% endif %}
+      {% for field in form %}
+        <div class="mb-3">
+          <label class="form-label fw-semibold" for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% if field.errors %}<div class="text-danger small mt-1">{{ field.errors|join:", " }}</div>{% endif %}
+        </div>
+      {% endfor %}
+      <button class="btn btn-primary w-100" type="submit">Sign in</button>
+    </form>
+    <p class="text-center text-secondary mt-4 mb-2">New to CarePoint? <a href="{% url 'signup' %}">Create an account</a></p>
+    <p class="text-center small mb-0"><a href="{% url 'admin:login' %}">Administrator sign in</a></p>
+  </div>
+</div></div></div></section>
+{% endblock %}

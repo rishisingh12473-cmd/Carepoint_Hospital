@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}About CarePoint Hospital{% endblock %}
+{% block content %}
+<section class="page-banner"><div class="container"><span class="eyebrow">About CarePoint</span><h1 class="display-5 fw-bold mt-2">Care built around people.</h1><p class="lead text-secondary mb-0">A welcoming place to find information, support, and connected care.</p></div></section>
+<section class="section-space"><div class="container"><div class="row g-5 align-items-center">
+  <div class="col-lg-6"><div class="soft-card p-5 text-center" style="background:linear-gradient(145deg,#e7f6f4,#f8fbfb)"><div class="icon-box mx-auto mb-4" style="width:82px;height:82px;font-size:2rem"><i class="fa-solid fa-hospital"></i></div><p class="eyebrow">CarePoint Hospital</p><p class="h3 fw-bold">Your health is personal.<br>Our care should be too.</p><p class="text-secondary mb-0">Compassion · Respect · Collaboration</p></div></div>
+  <div class="col-lg-6"><span class="eyebrow">Our approach</span><h2 class="section-title mt-2 mb-3">Listening is where good care begins.</h2><p class="text-secondary">CarePoint is a hospital-management website concept designed to make it easier for patients to explore services and request appointments. Our goal is to support respectful, coordinated care for individuals and families.</p><p class="text-secondary">Our departments bring together a range of services, while our administrative team helps patients find the right next step. Appointment requests submitted online are reviewed by staff and require confirmation.</p><a class="btn btn-primary mt-2" href="{% url 'appointment' %}">Request an appointment</a></div>
+</div></div></section>
+<section class="pb-5"><div class="container"><div class="row g-3">
+  <div class="col-md-4"><div class="soft-card p-4 h-100"><div class="icon-box mb-3"><i class="fa-solid fa-hand-holding-heart"></i></div><h3 class="h5 fw-bold">Compassion</h3><p class="text-secondary mb-0">We treat every person with dignity, patience, and kindness.</p></div></div>
+  <div class="col-md-4"><div class="soft-card p-4 h-100"><div class="icon-box mb-3"><i class="fa-solid fa-people-group"></i></div><h3 class="h5 fw-bold">Collaboration</h3><p class="text-secondary mb-0">We work together to help patients navigate their care.</p></div></div>
+  <div class="col-md-4"><div class="soft-card p-4 h-100"><div class="icon-box mb-3"><i class="fa-solid fa-shield-heart"></i></div><h3 class="h5 fw-bold">Trust</h3><p class="text-secondary mb-0">We value clear communication and responsible service.</p></div></div>
+</div></div></section>
+{% endblock %}

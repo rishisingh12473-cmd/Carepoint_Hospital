@@ -1,0 +1,137 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#087f8c">
+  <title>{% block title %}CarePoint Hospital{% endblock %}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <style>
+    :root{--teal:#087f8c;--teal-dark:#075d68;--mint:#e8f6f5;--ink:#18343b;--muted:#60777d;--line:#e4eeee}
+    body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:#fff}
+    a{color:var(--teal)}
+    .topbar{font-size:.9rem;background:#f4faf9;color:var(--muted)}
+    .brand-mark{width:42px;height:42px;border-radius:14px;background:var(--teal);color:white;display:inline-grid;place-items:center}
+    .brand-name{font-size:1.35rem;font-weight:750;color:var(--ink);letter-spacing:-.04em}
+    .navbar .nav-link{color:#405a61;font-weight:550;padding:.7rem .8rem!important}
+    .navbar .nav-link:hover,.navbar .nav-link.active{color:var(--teal)}
+    .btn-primary{--bs-btn-bg:var(--teal);--bs-btn-border-color:var(--teal);--bs-btn-hover-bg:var(--teal-dark);--bs-btn-hover-border-color:var(--teal-dark);border-radius:999px;padding:.7rem 1.25rem}
+    .btn-outline-primary{--bs-btn-color:var(--teal);--bs-btn-border-color:var(--teal);--bs-btn-hover-bg:var(--teal);--bs-btn-hover-border-color:var(--teal);border-radius:999px}
+    .eyebrow{color:var(--teal);font-weight:750;text-transform:uppercase;letter-spacing:.13em;font-size:.78rem}
+    .section-space{padding:4.5rem 0}
+    .section-title{font-weight:750;letter-spacing:-.04em}
+    .soft-card{border:1px solid var(--line);border-radius:1.1rem;background:#fff;box-shadow:0 12px 35px rgba(24,52,59,.06)}
+    .icon-box{width:52px;height:52px;border-radius:16px;background:var(--mint);color:var(--teal);display:grid;place-items:center;font-size:1.25rem}
+    .page-banner{background:linear-gradient(120deg,#e8f6f5,#f7fbfb);padding:4rem 0}
+    .form-control,.form-select{border-color:var(--line);padding:.75rem .9rem;border-radius:.7rem}
+    .form-control:focus,.form-select:focus{border-color:var(--teal);box-shadow:0 0 0 .2rem rgba(8,127,140,.13)}
+    .footer{background:#102f36;color:#d5e5e6}
+    .footer a{color:#d5e5e6;text-decoration:none}
+    .footer a:hover{color:#fff}
+    .footer-muted{color:#a7c0c3}
+    @media(max-width:767px){.section-space{padding:3rem 0}.topbar .contact-detail{display:none}}
+  </style>
+</head>
+<body>
+  <div class="topbar py-2">
+    <div class="container d-flex justify-content-between align-items-center">
+      <span><i class="fa-regular fa-clock me-2 text-success"></i>Outpatient appointments: Mon–Sat, 8:00 AM–8:00 PM</span>
+      <span class="contact-detail"><i class="fa-solid fa-kit-medical me-2 text-success"></i>In an emergency, contact local emergency services</span>
+    </div>
+  </div>
+  <header class="border-bottom">
+    <nav class="navbar navbar-expand-lg bg-white">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="{% url 'home' %}">
+          <span class="brand-mark"><i class="fa-solid fa-heart-pulse"></i></span>
+          <span class="brand-name">CarePoint<span class="text-success">.</span></span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavigation" aria-controls="mainNavigation" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNavigation">
+          <ul class="navbar-nav ms-auto align-items-lg-center">
+            <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'details' %}">Departments</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'services' %}">Services</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'team' %}">Care team</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'gallery' %}">Facilities</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {% if request.user.is_authenticated %}{{ request.user.get_username }}{% else %}Account{% endif %}
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                {% if request.user.is_authenticated %}
+                  {% if request.user.is_staff %}<li><a class="dropdown-item" href="{% url 'admin:index' %}">Administration</a></li>{% endif %}
+                  <li>
+                    <form method="post" action="{% url 'patient_logout' %}">
+                      {% csrf_token %}
+                      <button class="dropdown-item" type="submit">Sign out</button>
+                    </form>
+                  </li>
+                {% else %}
+                  <li><a class="dropdown-item" href="{% url 'patient_login' %}">Patient sign in</a></li>
+                  <li><a class="dropdown-item" href="{% url 'signup' %}">Create patient account</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="{% url 'admin:login' %}">Administrator sign in</a></li>
+                {% endif %}
+              </ul>
+            </li>
+            <li class="nav-item ms-lg-2"><a class="btn btn-primary" href="{% url 'appointment' %}">Book appointment</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    {% if messages %}
+      <div class="container pt-3">
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags|default:'info' }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="footer pt-5 pb-3">
+    <div class="container">
+      <div class="row g-4 pb-4">
+        <div class="col-md-5">
+          <a class="d-inline-flex align-items-center gap-2 text-decoration-none text-white mb-3" href="{% url 'home' %}">
+            <span class="brand-mark"><i class="fa-solid fa-heart-pulse"></i></span><span class="brand-name text-white">CarePoint.</span>
+          </a>
+          <p class="footer-muted mb-0">Thoughtful, accessible care for every stage of life. For emergencies, call your local emergency number.</p>
+        </div>
+        <div class="col-6 col-md-2">
+          <h6 class="text-white">Explore</h6>
+          <p class="mb-2"><a href="{% url 'about' %}">About us</a></p>
+          <p class="mb-2"><a href="{% url 'details' %}">Departments</a></p>
+          <p class="mb-2"><a href="{% url 'team' %}">Care team</a></p>
+        </div>
+        <div class="col-6 col-md-2">
+          <h6 class="text-white">Patient care</h6>
+          <p class="mb-2"><a href="{% url 'appointment' %}">Appointments</a></p>
+          <p class="mb-2"><a href="{% url 'services' %}">Services</a></p>
+          <p class="mb-2"><a href="{% url 'contact' %}">Contact</a></p>
+        </div>
+        <div class="col-md-3">
+          <h6 class="text-white">Visit us</h6>
+          <p class="footer-muted mb-2"><i class="fa-solid fa-location-dot me-2"></i>Lucknow, Uttar Pradesh</p>
+          <p class="footer-muted mb-0"><i class="fa-solid fa-envelope me-2"></i>Use our contact form for enquiries</p>
+        </div>
+      </div>
+      <div class="border-top border-secondary pt-3 d-flex flex-column flex-sm-row justify-content-between footer-muted small">
+        <span>© {% now "Y" %} CarePoint Hospital</span><span>For emergencies, please contact local emergency services.</span>
+      </div>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
